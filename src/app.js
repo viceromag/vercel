@@ -15,7 +15,7 @@ const api = RebillyAPI({
 });
 
 
-app.post('/invoices', (req, res) => {
+app.get('/invoices', (req, res) => {
     api.invoices.getAll({filter:'customerId:cus_01J63Y0C1XZ5Q3M4G9W246KX2P'}).then(function (invoices){
         res.send(invoices);
     })
