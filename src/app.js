@@ -91,6 +91,77 @@ app.post('/deposit-request', (req, res) => {
                 });
             });
     });
+	
+app.post('/deposit-request-project-11', (req, res) => {
+    const customerId = 'cus_01J72X65QDGA4DJ7FXSSXMRYRR';
+    const response = {};
+    const data = {
+        mode: "passwordless",
+        customerId,
+    };
+    api.customerAuthentication.login({
+        data,
+    }).then(function (login){
+        const { fields: exchangeToken } =
+            api.customerAuthentication.exchangeToken({
+                token: login.fields.token,
+                data: {
+                    acl: [
+                        {
+                            scope: {
+                                organizationId: [REBILLY_ORGANIZATION_ID],
+                            },
+                            permissions: [
+                                "PostToken",
+                                "PostDigitalWalletValidation",
+                                "StorefrontGetAccount",
+                                "StorefrontPatchAccount",
+                                "StorefrontPostPayment",
+                                "StorefrontGetTransactionCollection",
+                                "StorefrontGetTransaction",
+                                "StorefrontGetPaymentInstrumentCollection",
+                                "StorefrontPostPaymentInstrument",
+                                "StorefrontGetPaymentInstrument",
+                                "StorefrontPatchPaymentInstrument",
+                                "StorefrontPostPaymentInstrumentDeactivation",
+                                "StorefrontGetWebsite",
+                                "StorefrontGetInvoiceCollection",
+                                "StorefrontGetInvoice",
+                                "StorefrontGetProductCollection",
+                                "StorefrontGetProduct",
+                                "StorefrontPostReadyToPay",
+                                "StorefrontGetPaymentInstrumentSetup",
+                                "StorefrontPostPaymentInstrumentSetup",
+                                "StorefrontGetDepositRequest",
+                                "StorefrontGetDepositStrategy",
+                                "StorefrontPostDeposit",
+                            ],
+                        },
+                    ],
+                    customClaims: {
+                        websiteId: REBILLY_WEBSITE_ID,
+                    },
+                },
+            }).then(function (exchangeToken){
+                const requestDepositData = {
+                    websiteId: REBILLY_WEBSITE_ID,
+                    customerId,
+                    currency: "USD",
+                    amounts: [10, 20,30, 40],
+                    "amountLimits": {
+                        "minimum": 10,
+                        "maximum": 5000
+                    },
+                };
+                api.depositRequests.create({
+                    data: requestDepositData,
+                }).then(function (deposit){
+                    response.token = exchangeToken.fields.token;
+                    response.depositRequestId = deposit.fields.id;
+                    res.send(response);
+                });
+            });
+    });
 
 
 });
