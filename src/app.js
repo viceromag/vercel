@@ -293,7 +293,7 @@ app.post('/deposit-cad', (req, res) => {
                 const requestDepositData = {
                     websiteId: REBILLY_WEBSITE_ID,
                     customerId,
-                    currency: "USD",
+                    currency: "CAD",
 					strategyId: "dep_str_01JAZRCMXF0K3GH8NYGYYK21TJ",
                 };
                 api.depositRequests.create({
