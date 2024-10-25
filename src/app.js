@@ -6,7 +6,7 @@ const app = express();
 const port = 3000;
 app.use(cors());
 
-const REBILLY_API_SECRET_KEY = "*";
+const REBILLY_API_SECRET_KEY = "sk_sandbox_i1a-6LXuIdnizfCXj5AjWUik1lMqRCGde9tXAT0";
 const REBILLY_WEBSITE_ID = "google.com";
 const REBILLY_ORGANIZATION_ID = 'phronesis---summitvilla';
 const api = RebillyAPI({
