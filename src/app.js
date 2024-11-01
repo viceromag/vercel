@@ -69,7 +69,7 @@ app.post('/deposit-usd', (req, res) => {
                     websiteId: REBILLY_WEBSITE_ID,
                     customerId,
                     currency: "USD",
-					//strategyId: "dep_str_01JAZR9M6QEB792433FNEQKCTV",
+					strategyId: "dep_str_01JBKC2QRTYSF6MKEE9HZ1T9NB",
                 };
                 api.depositRequests.create({
                     data: requestDepositData,
@@ -139,7 +139,7 @@ app.post('/deposit-cad', (req, res) => {
                     websiteId: REBILLY_WEBSITE_ID,
                     customerId,
                     currency: "CAD",
-					//strategyId: "dep_str_01JAZRCMXF0K3GH8NYGYYK21TJ",
+					strategyId: "dep_str_01JBKC4C65T8XXV336JAQ27FT3",
                 };
                 api.depositRequests.create({
                     data: requestDepositData,
