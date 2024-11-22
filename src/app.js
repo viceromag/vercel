@@ -83,6 +83,8 @@ app.post('/deposit-usd', (req, res) => {
 });
 
 app.post('/payout', (req, res) => {
+    const currency = req.currency;
+    const amount = req.amount;
     const customerId = 'test-customer';
     const response = {};
     const data = {
@@ -140,8 +142,8 @@ app.post('/payout', (req, res) => {
                 const requestPayoutData = {
                     websiteId: REBILLY_WEBSITE_ID,
                     customerId,
-                    currency: "USD",
-                    amount: 200
+                    currency,
+                    amount
                 };
                 api.payoutRequests.create({
                     data: requestPayoutData,
