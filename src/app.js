@@ -82,9 +82,10 @@ app.post('/deposit-usd', (req, res) => {
     });
 });
 
+app.use(express.json());
+
 app.post('/payout', (req, res) => {
-    const currency = req.currency;
-    const amount = req.amount;
+    const { currency, amount } = req.body;
     const customerId = 'test-customer';
     const response = {};
     const data = {
