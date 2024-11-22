@@ -86,6 +86,9 @@ app.use(express.json());
 
 app.post('/payout', (req, res) => {
     const { currency, amount } = req.body;
+    if (!currency || !amount) {
+        throw new Error('Missing currency or amount in request body');
+    }
     const customerId = 'test-customer';
     const response = {};
     const data = {
