@@ -226,8 +226,36 @@ app.post('/deposit-cad', (req, res) => {
                 });
             });
     });
+});
 
-
+app.post('/create-deposit-request', async (req, res) => {
+    try {
+        /*
+            Make a POST API request to Rebilly to create a deposit request.
+            https://www.rebilly.com/catalog/all/deposits/postdepositrequest
+        */
+        const response = await rebilly.depositRequests.create({
+            data: {
+                websiteId: REBILLY_WEBSITE_ID,
+                // Replace {{ CUSTOMER_ID }} with the ID of the customer for which
+                // a deposit request should be created.
+                customerId: 'test-customer',
+                // Replace {{ CURRENCY }} with the currency code in ISO 4217 format.
+                currency: 'USD',
+            }
+        });
+        // Extract the cashier token from the response.
+        const token = response.fields.cashierToken;
+        // Return the token.
+        res.send({ token });
+    } catch (error) {
+        // Log any errors that occur.
+        if (error?.response?.data) {
+            console.error(error.response.data);
+        } else {
+            console.error(error);
+        }
+    }
 });
 
 app.listen(port, () => {
