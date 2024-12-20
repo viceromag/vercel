@@ -242,6 +242,7 @@ app.post('/create-deposit-request', async (req, res) => {
                 customerId: 'test-customer',
                 // Replace {{ CURRENCY }} with the currency code in ISO 4217 format.
                 currency: 'USD',
+                strategyId: 'dep_str_01JBKC2QRTYSF6MKEE9HZ1T9NB',
             }
         });
         // Extract the cashier token from the response.
