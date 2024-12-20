@@ -234,7 +234,7 @@ app.post('/create-deposit-request', async (req, res) => {
             Make a POST API request to Rebilly to create a deposit request.
             https://www.rebilly.com/catalog/all/deposits/postdepositrequest
         */
-        const response = await rebilly.depositRequests.create({
+        const response = await api.depositRequests.create({
             data: {
                 websiteId: REBILLY_WEBSITE_ID,
                 // Replace {{ CUSTOMER_ID }} with the ID of the customer for which
